@@ -754,49 +754,74 @@ body {
 /* RESPONSIVE */
 /* ============================= */
 @media (max-width: 640px) {
-  .envelope {
-    width: 340px;
-    height: 240px;
-  }
 
-  .names {
-    font-size: 1.8rem;
-  }
-
-  .card { 
-    padding: 36px 24px;
-    min-height: 480px;
-  }
-
-  .card-taller { 
-    padding: 40px 28px;
-    min-height: 480px;
-  }
-
-  .photo-placeholder { 
-    max-width: 100%;
-  }
-
-  .circle { 
-    width: 80px;
-    height: 80px;
-    font-size: 1.3rem;
-  }
-
-  .cal-grid { 
-    gap: 6px;
-  }
-
-  .section { 
-    padding: 35px 15px;
+  body {
+    font-size: 1.35rem;
   }
 
   .title {
+    font-size: 3rem;
+  }
+
+  .subtitle {
     font-size: 1.7rem;
   }
 
+  .names {
+    font-size: 3rem;
+  }
+
   .quote {
-    font-size: 1.05rem;
-    padding: 0 20px;
+    font-size: 1.55rem;
+  }
+
+  .circle {
+    width: 130px;
+    height: 130px;
+    font-size: 2.2rem;
+  }
+
+  .circle small {
+    font-size: 1.1rem;
+  }
+
+  .cal-day {
+    font-size: 1.65rem;
+    padding: 18px 16px;
+  }
+
+  .date {
+    font-size: 1.85rem;
+  }
+
+  .input-text {
+    font-size: 1.35rem;
+    padding: 22px;
+  }
+
+  .btn {
+    font-size: 1.55rem;
+    padding: 20px 30px;
+  }
+
+  .reco-list {
+    font-size: 1.45rem;
+    line-height: 2.3;
+  }
+
+  .no-kids p {
+    font-size: 1.45rem;
+  }
+
+  .closing {
+    font-size: 2rem;
+  }
+
+  .invite-img {
+    max-width: 380px;
+  }
+
+  .click-text {
+    font-size: 1.35rem;
   }
 }
