@@ -3,15 +3,77 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marllene & Arturo · 06.06.2026</title>
+  <title>Marllene & Arturo · 13.06.2026</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Dancing+Script:wght@500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── Foto encima del player ── */
+    .player-hero-img {
+      width: 100%;
+      max-width: 380px;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 16px;
+      margin: 0 auto 24px;
+      display: block;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.22);
+    }
+
+    /* ── Div invisible para el iframe de YouTube ── */
+    #yt-player-div {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    /* ── Galería vertical con texto ── */
+    .gallery-section {
+      padding: 80px 20px;
+      background: #faf9f7;
+    }
+    .gallery-section .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .photo-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 680px;
+      margin: 0 auto 72px;
+    }
+    .photo-block:last-child { margin-bottom: 0; }
+    .photo-block img {
+      width: 100%;
+      max-width: 560px;
+      height: 420px;
+      object-fit: cover;
+      border-radius: 14px;
+      box-shadow: 0 10px 36px rgba(0,0,0,0.13);
+      transition: transform 0.4s ease;
+    }
+    .photo-block img:hover { transform: scale(1.015) translateY(-4px); }
+    .photo-caption {
+      margin-top: 22px;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.18rem;
+      color: #6b5b4e;
+      text-align: center;
+      max-width: 460px;
+      line-height: 1.75;
+      letter-spacing: 0.015em;
+    }
+    .photo-caption::before { content: '\2014\00a0'; }
+  </style>
 </head>
 <body>
 
-  <!-- ══════════════════════════════
-       SOBRE (pantalla de entrada)
-  ══════════════════════════════ -->
+  <!-- ══ SOBRE ══ -->
   <div id="envelope-screen">
     <div class="petals-bg" id="petals"></div>
 
@@ -21,7 +83,6 @@
         <div class="env-side env-right"></div>
         <div class="env-bottom"></div>
         <div class="env-flap" id="flap"></div>
-
         <div class="env-front">
           <div class="env-wax">♥</div>
           <p class="env-label">Con amor, los invitan</p>
@@ -30,16 +91,14 @@
             <span class="env-amp">&</span>
             <span class="name-script">Arturo</span>
           </h1>
-          <p class="env-date">06 · 06 · 2026</p>
+          <p class="env-date">13 · 06 · 2026</p>
           <p class="env-hint">Toca para abrir ✦</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ══════════════════════════════
-       INVITACIÓN (contenido)
-  ══════════════════════════════ -->
+  <!-- ══ INVITACIÓN ══ -->
   <div id="invitation" class="hidden">
 
     <!-- 1. HERO -->
@@ -55,7 +114,7 @@
         <p class="hero-sub fade-in delay-3">tienen el honor de invitarte a su boda</p>
         <div class="hero-date fade-in delay-4">
           <span>Sábado</span>
-          <span class="big-num">06</span>
+          <span class="big-num">13</span>
           <span>Junio 2026</span>
         </div>
       </div>
@@ -71,14 +130,24 @@
           y mi corazón deje de latir."
         </p>
       </div>
+
       <div class="player-wrap fade-up delay-1">
         <p class="player-label">Dale play a nuestra canción</p>
+
+        <!-- Foto encima del card del player -->
+        <img
+          src="images/SaveTheDate(6).jpg"
+          alt="Marllene y Arturo"
+          class="player-hero-img"
+          onerror="this.style.display='none'"
+        />
+
         <div class="player-card">
           <div class="player-info">
             <div class="player-disc" id="disc">♪</div>
             <div>
-              <p class="player-song">Nuestra Canción</p>
-              <p class="player-artist">Marllene &amp; Arturo</p>
+              <p class="player-song">Cama y Mesa</p>
+              <p class="player-artist">Roberto Carlos</p>
             </div>
           </div>
           <div class="player-controls">
@@ -91,6 +160,9 @@
           </div>
         </div>
       </div>
+
+      <!-- Aquí se monta el iframe invisible de YouTube (lo crea app.js) -->
+      <div id="yt-player-div"></div>
     </section>
 
     <!-- 3. COUNTDOWN -->
@@ -100,7 +172,7 @@
         <p class="sage-pre fade-up">Con la bendición de Dios y nuestros padres,<br>tenemos el honor de invitarles a nuestra boda</p>
         <div class="date-display fade-up delay-1">
           <span class="dd-day">SÁBADO</span>
-          <span class="dd-num">06</span>
+          <span class="dd-num">13</span>
           <span class="dd-month">JUNIO</span>
           <span class="dd-year">2026</span>
         </div>
@@ -121,7 +193,6 @@
     <section class="section events-section" id="s-events">
       <h2 class="section-title fade-up">El Gran Día</h2>
       <div class="events-grid">
-
         <div class="event-card fade-up delay-1">
           <div class="event-icon">🥂</div>
           <h3 class="event-name script-md">Recepción</h3>
@@ -130,15 +201,33 @@
           <p class="event-city">Monterrey, N.L.</p>
           <a class="event-btn" href="https://www.google.com/maps/place/Quinta+los+Alazanes/@25.8154146,-100.5954717,3a,75y,90t/data=!3m8!1e2!3m6!1sCIHM0ogKEICAgIDnjcyEXw!2e10!3e12!6shttps:%2F%2Flh3.googleusercontent.com%2Fgps-cs-s%2FAHVAweqBYWqDkV3VTa1kEFvDrxM1cFc-GNahmvT1gO2cIvZOx6AiV-CSfONaC0HKnFe3tx4XUNp43FpwqLLf65ZqGQEf7hfZMgl91b-UiadePBxRLUVOlHy2pd_PBckqEU074gwdP4DM%3Dw152-h86-k-no!7i4032!8i2268!4m15!1m7!3m6!1s0x86629d7b9dcfd71b:0xa810c478608077d2!2sQuinta+los+Alazanes!8m2!3d25.8154146!4d-100.5954717!16s%2Fg%2F11h51jvb9r!3m6!1s0x86629d7b9dcfd71b:0xa810c478608077d2!8m2!3d25.8154146!4d-100.5954717!10e5!16s%2Fg%2F11h51jvb9r?entry=ttu&g_ep=EgoyMDI2MDMxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank">Ver ubicación</a>
         </div>
-
       </div>
     </section>
 
-    <!-- 5. ITINERARIO -->
+    <!-- 5. GALERÍA: 3 fotos con texto -->
+    <section class="section gallery-section" id="s-gallery">
+      <h2 class="section-title fade-up">Nuestra Historia</h2>
+
+      <div class="photo-block fade-up delay-1">
+        <img src="images/SaveTheDate(6).jpg" alt="Marllene y Arturo" onerror="this.style.display='none'">
+        <p class="photo-caption">Dos personas, un mismo camino. Así empezó todo.</p>
+      </div>
+
+      <div class="photo-block fade-up delay-2">
+        <img src="images/SaveTheDate(7).jpg" alt="Marllene y Arturo" onerror="this.style.display='none'">
+        <p class="photo-caption">Contigo aprendí que hay cosas que no se buscan, simplemente llegan.</p>
+      </div>
+
+      <div class="photo-block fade-up delay-3">
+        <img src="images/SaveTheDate(29).jpg" alt="Marllene y Arturo" onerror="this.style.display='none'">
+        <p class="photo-caption">Y ahora, lo que sigue, lo escribimos juntos.</p>
+      </div>
+    </section>
+
+    <!-- 6. ITINERARIO -->
     <section class="section itinerary-section" id="s-itinerary">
       <h2 class="section-title fade-up">Itinerario de Actividades</h2>
       <div class="timeline">
-
         <div class="tl-item fade-up delay-1">
           <div class="tl-icon">🥂</div>
           <div class="tl-line"></div>
@@ -147,7 +236,6 @@
             <p class="tl-name">Cóctel de Bienvenida</p>
           </div>
         </div>
-
         <div class="tl-item fade-up delay-2">
           <div class="tl-icon">💃</div>
           <div class="tl-line"></div>
@@ -156,7 +244,6 @@
             <p class="tl-name">Primer Baile, Vals y Brindis</p>
           </div>
         </div>
-
         <div class="tl-item fade-up delay-3">
           <div class="tl-icon">🍽️</div>
           <div class="tl-line"></div>
@@ -165,7 +252,6 @@
             <p class="tl-name">Cena y Festejo</p>
           </div>
         </div>
-
         <div class="tl-item fade-up delay-4">
           <div class="tl-icon">🎂</div>
           <div class="tl-line"></div>
@@ -174,7 +260,6 @@
             <p class="tl-name">Pastel y Sorpresas</p>
           </div>
         </div>
-
         <div class="tl-item fade-up delay-5">
           <div class="tl-icon">✨</div>
           <div class="tl-line last"></div>
@@ -183,11 +268,10 @@
             <p class="tl-name">¡A bailar hasta el amanecer!</p>
           </div>
         </div>
-
       </div>
     </section>
 
-    <!-- 6. VESTIMENTA -->
+    <!-- 7. VESTIMENTA -->
     <section class="section dress-section" id="s-dress">
       <h2 class="section-title fade-up">Código de Vestimenta</h2>
       <div class="dress-wrap fade-up delay-1">
@@ -215,7 +299,7 @@
       </div>
     </section>
 
-    <!-- 7. REGALO -->
+    <!-- 8. REGALO -->
     <section class="section gift-section" id="s-gift">
       <div class="sage-bg"></div>
       <div class="gift-inner">
@@ -225,28 +309,26 @@
           El mejor regalo es tu presencia,<br>pero si deseas tener un detalle con nosotros,<br>les dejamos esta opción
         </p>
         <div class="qr-box fade-up delay-3">
-          <div class="qr-placeholder">
-            <p>QR</p>
-          </div>
+          <div class="qr-placeholder"><p>QR</p></div>
         </div>
       </div>
     </section>
 
-    <!-- 8. CONFIRMACIÓN -->
+    <!-- 9. CONFIRMACIÓN -->
     <section class="section rsvp-section" id="s-rsvp">
       <div class="rsvp-icon fade-up">📅</div>
       <h2 class="section-title fade-up delay-1">Confirmación</h2>
       <p class="rsvp-text fade-up delay-2">Agradecemos que confirmes tu asistencia<br>antes del <strong>01 de mayo de 2026</strong></p>
       <div class="fade-up delay-3">
         <a class="rsvp-btn"
-          href="https://wa.me/527891258642?text=Buenas%20tardes%2C%20con%20mucho%20gusto%20confirmo%20mi%20asistencia%20a%20la%20boda%20de%20Marllene%20y%20Arturo%20el%20pr%C3%B3ximo%206%20de%20junio%20de%202026.%20Les%20deseo%20una%20vida%20llena%20de%20amor%2C%20felicidad%20y%20bendiciones.%20Hasta%20pronto."
+          href="https://wa.me/527891258642?text=Buenas%20tardes%2C%20con%20mucho%20gusto%20confirmo%20mi%20asistencia%20a%20la%20boda%20de%20Marllene%20y%20Arturo%20el%20pr%C3%B3ximo%2013%20de%20junio%20de%202026.%20Les%20deseo%20una%20vida%20llena%20de%20amor%2C%20felicidad%20y%20bendiciones.%20Hasta%20pronto."
           target="_blank">
           💬 Confirmar asistencia
         </a>
       </div>
     </section>
 
-    <!-- 9. RECOMENDACIONES -->
+    <!-- 10. RECOMENDACIONES -->
     <section class="section tips-section" id="s-tips">
       <h2 class="section-title fade-up">Recomendaciones</h2>
       <div class="tips-grid">
@@ -269,14 +351,14 @@
       </div>
     </section>
 
-    <!-- 10. CIERRE -->
+    <!-- 11. CIERRE -->
     <section class="section closing-section" id="s-closing">
       <div class="sage-bg"></div>
       <div class="closing-inner fade-up">
         <p class="closing-pre">Esperamos contar con su presencia</p>
         <h2 class="script-xl">Muchas Gracias!</h2>
         <div class="closing-hearts">♥ &nbsp; ♥ &nbsp; ♥</div>
-        <p class="closing-names">Marllene &amp; Arturo · 06.06.2026</p>
+        <p class="closing-names">Marllene &amp; Arturo · 13.06.2026</p>
       </div>
     </section>
 
