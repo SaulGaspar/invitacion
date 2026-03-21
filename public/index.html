@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Dancing+Script:wght@500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
+    /* ── Foto encima del player ── */
     .player-hero-img {
       width: 100%;
       max-width: 380px;
@@ -19,6 +20,17 @@
       box-shadow: 0 10px 40px rgba(0,0,0,0.22);
     }
 
+    /* ── Div invisible para el iframe de YouTube ── */
+    #yt-player-div {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    /* ── Galería vertical con texto ── */
     .gallery-section {
       padding: 80px 20px;
       background: #faf9f7;
@@ -61,8 +73,10 @@
 </head>
 <body>
 
+  <!-- ══ SOBRE ══ -->
   <div id="envelope-screen">
     <div class="petals-bg" id="petals"></div>
+
     <div id="envelope" onclick="openEnvelope()">
       <div class="env-body">
         <div class="env-side env-left"></div>
@@ -84,8 +98,10 @@
     </div>
   </div>
 
+  <!-- ══ INVITACIÓN ══ -->
   <div id="invitation" class="hidden">
 
+    <!-- 1. HERO -->
     <section class="section hero-section" id="s-hero">
       <div class="hero-bg"></div>
       <div class="hero-content">
@@ -105,6 +121,7 @@
       <div class="scroll-hint">↓</div>
     </section>
 
+    <!-- 2. FRASE + CANCIÓN -->
     <section class="section quote-section" id="s-quote">
       <div class="quote-wrap fade-up">
         <p class="quote-text">
@@ -117,6 +134,7 @@
       <div class="player-wrap fade-up delay-1">
         <p class="player-label">Dale play a nuestra canción</p>
 
+        <!-- Foto encima del card del player -->
         <img
           src="images/SaveTheDate(6).jpg"
           alt="Marllene y Arturo"
@@ -142,8 +160,12 @@
           </div>
         </div>
       </div>
+
+      <!-- Aquí se monta el iframe invisible de YouTube (lo crea app.js) -->
+      <div id="yt-player-div"></div>
     </section>
 
+    <!-- 3. COUNTDOWN -->
     <section class="section countdown-section" id="s-countdown">
       <div class="sage-bg"></div>
       <div class="countdown-inner">
@@ -167,6 +189,7 @@
       </div>
     </section>
 
+    <!-- 4. RECEPCIÓN -->
     <section class="section events-section" id="s-events">
       <h2 class="section-title fade-up">El Gran Día</h2>
       <div class="events-grid">
@@ -181,6 +204,7 @@
       </div>
     </section>
 
+    <!-- 5. GALERÍA: 3 fotos con texto -->
     <section class="section gallery-section" id="s-gallery">
       <h2 class="section-title fade-up">Nuestra Historia</h2>
 
@@ -200,39 +224,45 @@
       </div>
     </section>
 
+    <!-- 6. ITINERARIO -->
     <section class="section itinerary-section" id="s-itinerary">
       <h2 class="section-title fade-up">Itinerario de Actividades</h2>
       <div class="timeline">
         <div class="tl-item fade-up delay-1">
-          <div class="tl-icon">🥂</div><div class="tl-line"></div>
+          <div class="tl-icon">🥂</div>
+          <div class="tl-line"></div>
           <div class="tl-content">
             <p class="tl-time">6:00 pm</p>
             <p class="tl-name">Cóctel de Bienvenida</p>
           </div>
         </div>
         <div class="tl-item fade-up delay-2">
-          <div class="tl-icon">💃</div><div class="tl-line"></div>
+          <div class="tl-icon">💃</div>
+          <div class="tl-line"></div>
           <div class="tl-content">
             <p class="tl-time">7:30 pm</p>
             <p class="tl-name">Primer Baile, Vals y Brindis</p>
           </div>
         </div>
         <div class="tl-item fade-up delay-3">
-          <div class="tl-icon">🍽️</div><div class="tl-line"></div>
+          <div class="tl-icon">🍽️</div>
+          <div class="tl-line"></div>
           <div class="tl-content">
             <p class="tl-time">8:00 pm</p>
             <p class="tl-name">Cena y Festejo</p>
           </div>
         </div>
         <div class="tl-item fade-up delay-4">
-          <div class="tl-icon">🎂</div><div class="tl-line"></div>
+          <div class="tl-icon">🎂</div>
+          <div class="tl-line"></div>
           <div class="tl-content">
             <p class="tl-time">10:00 pm</p>
             <p class="tl-name">Pastel y Sorpresas</p>
           </div>
         </div>
         <div class="tl-item fade-up delay-5">
-          <div class="tl-icon">✨</div><div class="tl-line last"></div>
+          <div class="tl-icon">✨</div>
+          <div class="tl-line last"></div>
           <div class="tl-content">
             <p class="tl-time">11:00 pm – 1:00 am</p>
             <p class="tl-name">¡A bailar hasta el amanecer!</p>
@@ -241,6 +271,7 @@
       </div>
     </section>
 
+    <!-- 7. VESTIMENTA -->
     <section class="section dress-section" id="s-dress">
       <h2 class="section-title fade-up">Código de Vestimenta</h2>
       <div class="dress-wrap fade-up delay-1">
@@ -268,6 +299,7 @@
       </div>
     </section>
 
+    <!-- 8. REGALO -->
     <section class="section gift-section" id="s-gift">
       <div class="sage-bg"></div>
       <div class="gift-inner">
@@ -282,29 +314,21 @@
       </div>
     </section>
 
+    <!-- 9. CONFIRMACIÓN -->
     <section class="section rsvp-section" id="s-rsvp">
       <div class="rsvp-icon fade-up">📅</div>
       <h2 class="section-title fade-up delay-1">Confirmación</h2>
       <p class="rsvp-text fade-up delay-2">Agradecemos que confirmes tu asistencia<br>antes del <strong>01 de mayo de 2026</strong></p>
       <div class="fade-up delay-3">
-        <button class="rsvp-btn" onclick="confirmarAsistencia()">
+        <a class="rsvp-btn"
+          href="https://wa.me/527891258642?text=Buenas%20tardes%2C%20con%20mucho%20gusto%20confirmo%20mi%20asistencia%20a%20la%20boda%20de%20Marllene%20y%20Arturo%20el%20pr%C3%B3ximo%2013%20de%20junio%20de%202026.%20Les%20deseo%20una%20vida%20llena%20de%20amor%2C%20felicidad%20y%20bendiciones.%20Hasta%20pronto."
+          target="_blank">
           💬 Confirmar asistencia
-        </button>
+        </a>
       </div>
-
-      <script>
-        function confirmarAsistencia() {
-          var msg = encodeURIComponent(
-            'Buenas tardes, con mucho gusto confirmo mi asistencia a la boda de Marllene y Arturo el próximo 13 de junio de 2026. Les deseo una vida llena de amor, felicidad y bendiciones. Hasta pronto.'
-          );
-          window.open('https://wa.me/527891258642?text=' + msg, '_blank');
-          setTimeout(function () {
-            window.open('https://wa.me/528135986830?text=' + msg, '_blank');
-          }, 300);
-        }
-      </script>
     </section>
 
+    <!-- 10. RECOMENDACIONES -->
     <section class="section tips-section" id="s-tips">
       <h2 class="section-title fade-up">Recomendaciones</h2>
       <div class="tips-grid">
@@ -327,6 +351,7 @@
       </div>
     </section>
 
+    <!-- 11. CIERRE -->
     <section class="section closing-section" id="s-closing">
       <div class="sage-bg"></div>
       <div class="closing-inner fade-up">
@@ -337,7 +362,7 @@
       </div>
     </section>
 
-  </div>
+  </div><!-- /invitation -->
 
   <script src="app.js"></script>
 </body>
