@@ -6,7 +6,6 @@
   <title>Marllene & Arturo · 13.06.2026</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Dancing+Script:wght@500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
   <style>
     .player-hero-img {
@@ -76,22 +75,6 @@
       letter-spacing: 0.06em !important;
     }
 
-    /* ── Bootstrap Icons en timeline, tips, player ── */
-    .tl-icon i,
-    .tip-icon i,
-    .gift-icon-big i,
-    .rsvp-icon i,
-    .event-icon i,
-    .env-wax i,
-    .closing-hearts i {
-      font-size: inherit;
-      line-height: 1;
-    }
-    .tl-icon { font-size: 1.4rem; }
-    .tip-icon { font-size: 1.5rem; }
-    .gift-icon-big { font-size: 3.5rem; margin-bottom: 16px; }
-    .rsvp-icon { font-size: 2.5rem; margin-bottom: 12px; }
-    .event-icon { font-size: 2rem; }
   </style>
 </head>
 <body>
@@ -105,7 +88,7 @@
         <div class="env-bottom"></div>
         <div class="env-flap" id="flap"></div>
         <div class="env-front">
-          <div class="env-wax"><i class="bi bi-heart-fill"></i></div>
+          <div class="env-wax">♥</div>
           <p class="env-label">Con amor, los invitan</p>
           <h1 class="env-names">
             <span class="name-script">Marllene</span>
@@ -138,7 +121,7 @@
           <span>Junio 2026</span>
         </div>
       </div>
-      <div class="scroll-hint"><i class="bi bi-chevron-down"></i></div>
+      <div class="scroll-hint">↓</div>
     </section>
 
     <!-- 2. FRASE + CANCIÓN -->
@@ -155,16 +138,16 @@
         <img src="images/SaveTheDate(6).jpg" alt="Marllene y Arturo" class="player-hero-img" onerror="this.style.display='none'" />
         <div class="player-card">
           <div class="player-info">
-            <div class="player-disc" id="disc"><i class="bi bi-music-note-beamed"></i></div>
+            <div class="player-disc" id="disc">♪</div>
             <div>
               <p class="player-song">Cama y Mesa</p>
               <p class="player-artist">Roberto Carlos</p>
             </div>
           </div>
           <div class="player-controls">
-            <button class="p-btn" onclick="prevSong()"><i class="bi bi-skip-start-fill"></i></button>
-            <button class="p-btn p-play" id="playBtn" onclick="togglePlay()"><i class="bi bi-play-fill"></i></button>
-            <button class="p-btn" onclick="nextSong()"><i class="bi bi-skip-end-fill"></i></button>
+            <button class="p-btn" onclick="prevSong()">⏮</button>
+            <button class="p-btn p-play" id="playBtn" onclick="togglePlay()">▶</button>
+            <button class="p-btn" onclick="nextSong()">⏭</button>
           </div>
           <div class="player-bar">
             <div class="player-progress" id="progress"></div>
@@ -203,7 +186,7 @@
       <h2 class="section-title fade-up">El Gran Día</h2>
       <div class="events-grid">
         <div class="event-card fade-up delay-1">
-          <div class="event-icon"><i class="bi bi-stars"></i></div>
+          <div class="event-icon">🥂</div>
           <h3 class="event-name script-md">Recepción</h3>
           <p class="event-time">6:00 pm – 1:00 am</p>
           <p class="event-place">QUINTA LOS ALAZANES</p>
@@ -236,7 +219,7 @@
       <div class="timeline">
 
         <div class="tl-item fade-up delay-1">
-          <div class="tl-icon"><i class="bi bi-door-open"></i></div>
+          <div class="tl-icon">🚪</div>
           <div class="tl-line"></div>
           <div class="tl-content">
             <p class="tl-time">6:00 pm</p>
@@ -245,7 +228,7 @@
         </div>
 
         <div class="tl-item fade-up delay-2">
-          <div class="tl-icon"><i class="bi bi-camera"></i></div>
+          <div class="tl-icon">📸</div>
           <div class="tl-line"></div>
           <div class="tl-content">
             <p class="tl-time">6:30 pm</p>
@@ -254,7 +237,7 @@
         </div>
 
         <div class="tl-item fade-up delay-3">
-          <div class="tl-icon"><i class="bi bi-gem"></i></div>
+          <div class="tl-icon">💍</div>
           <div class="tl-line"></div>
           <div class="tl-content">
             <p class="tl-time">7:00 pm</p>
@@ -263,7 +246,7 @@
         </div>
 
         <div class="tl-item fade-up delay-4">
-          <div class="tl-icon"><i class="bi bi-cup-hot"></i></div>
+          <div class="tl-icon">🍽️</div>
           <div class="tl-line"></div>
           <div class="tl-content">
             <p class="tl-time">8:00 pm</p>
@@ -272,7 +255,7 @@
         </div>
 
         <div class="tl-item fade-up delay-5">
-          <div class="tl-icon"><i class="bi bi-balloon-heart"></i></div>
+          <div class="tl-icon">🥂</div>
           <div class="tl-line"></div>
           <div class="tl-content">
             <p class="tl-time">8:45 pm</p>
@@ -281,7 +264,7 @@
         </div>
 
         <div class="tl-item fade-up delay-5">
-          <div class="tl-icon"><i class="bi bi-music-note-list"></i></div>
+          <div class="tl-icon">🎉</div>
           <div class="tl-line"></div>
           <div class="tl-content">
             <p class="tl-time">9:15 pm</p>
@@ -290,7 +273,7 @@
         </div>
 
         <div class="tl-item fade-up delay-5">
-          <div class="tl-icon"><i class="bi bi-stars"></i></div>
+          <div class="tl-icon">✨</div>
           <div class="tl-line last"></div>
           <div class="tl-content">
             <p class="tl-time">10:00 pm</p>
@@ -307,11 +290,11 @@
       <div class="dress-wrap fade-up delay-1">
         <div class="dress-icons">
           <div class="dress-fig">
-            <div class="dress-silhouette male"><i class="bi bi-person-standing"></i></div>
+            <div class="dress-silhouette male">🤵</div>
             <p>Caballeros</p>
           </div>
           <div class="dress-fig">
-            <div class="dress-silhouette female"><i class="bi bi-person-standing-dress"></i></div>
+            <div class="dress-silhouette female">👗</div>
             <p>Damas</p>
           </div>
         </div>
@@ -324,7 +307,7 @@
     <section class="section gift-section" id="s-gift">
       <div class="sage-bg"></div>
       <div class="gift-inner">
-        <div class="gift-icon-big fade-up"><i class="bi bi-envelope-heart"></i></div>
+        <div class="gift-icon-big fade-up">💌</div>
         <h2 class="section-title white fade-up delay-1">Urna de Deseos</h2>
         <p class="gift-text fade-up delay-2">
           Tu presencia es el mejor regalo.<br>
@@ -340,12 +323,12 @@
 
     <!-- 9. CONFIRMACIÓN -->
     <section class="section rsvp-section" id="s-rsvp">
-      <div class="rsvp-icon fade-up"><i class="bi bi-calendar-heart"></i></div>
+      <div class="rsvp-icon fade-up">💬</div>
       <h2 class="section-title fade-up delay-1">Confirmación</h2>
       <p class="rsvp-text fade-up delay-2">Agradecemos que confirmes tu asistencia<br>antes del <strong>01 de mayo de 2026</strong></p>
       <div class="fade-up delay-3">
         <button class="rsvp-btn" onclick="confirmarAsistencia()">
-          <i class="bi bi-whatsapp"></i> Confirmar asistencia
+          💬 Confirmar asistencia
         </button>
       </div>
       <script>
@@ -364,19 +347,19 @@
       <h2 class="section-title fade-up">Recomendaciones</h2>
       <div class="tips-grid">
         <div class="tip-card fade-up delay-1">
-          <div class="tip-icon"><i class="bi bi-heart"></i></div>
+          <div class="tip-icon">♥</div>
           <p>Seguir las indicaciones del personal de la boda</p>
         </div>
         <div class="tip-card fade-up delay-2">
-          <div class="tip-icon"><i class="bi bi-clock"></i></div>
+          <div class="tip-icon">🕐</div>
           <p>Ser puntual — la recepción iniciará a tiempo</p>
         </div>
         <div class="tip-card fade-up delay-3">
-          <div class="tip-icon"><i class="bi bi-person-x"></i></div>
+          <div class="tip-icon">🚫</div>
           <p><strong>Sin niños</strong> — Es un evento para adultos. ¡Una noche llena de diversión les espera!</p>
         </div>
         <div class="tip-card fade-up delay-4">
-          <div class="tip-icon"><i class="bi bi-phone-vibrate"></i></div>
+          <div class="tip-icon">📵</div>
           <p>Durante el evento, por favor mantén tu teléfono en silencio</p>
         </div>
       </div>

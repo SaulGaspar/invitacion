@@ -205,7 +205,7 @@ function _resetUI() {
   clearInterval(progressTimer);
   const btn  = document.getElementById('playBtn');
   const disc = document.getElementById('disc');
-  if (btn)  btn.innerHTML = '<i class="bi bi-play-fill"></i>';
+  if (btn)  btn.textContent = '▶';
   if (disc) disc.classList.remove('spinning');
 }
 
@@ -221,7 +221,7 @@ function togglePlay() {
     isPlaying = true;
     const btn  = document.getElementById('playBtn');
     const disc = document.getElementById('disc');
-    if (btn)  btn.innerHTML = '<i class="bi bi-pause-fill"></i>';
+    if (btn)  btn.textContent = '⏸';
     if (disc) disc.classList.add('spinning');
     _startBar();
   }
