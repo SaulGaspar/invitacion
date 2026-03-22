@@ -83,78 +83,145 @@ function startCountdown() {
   setInterval(update, 1000);
 }
 
-// ══════════════════════════════════════
-//  REPRODUCTOR REAL · Cama y Mesa
-//  Roberto Carlos (YouTube IFrame API)
-// ══════════════════════════════════════
-const RC_VIDEO_ID = 'jOdhtimtnvo';
+// ══════════════════════════════════════════════════════
+//  REPRODUCTOR · Cama y Mesa – Roberto Carlos
+//
+//  Estrategia: iframe de YouTube posicionado FUERA
+//  de pantalla (no 1x1px, que muchos navegadores
+//  bloquean) controlado con postMessage + IFrame API.
+// ══════════════════════════════════════════════════════
 
-let isPlaying    = false;   // estado público (lo leen los botones del HTML)
+// IDs en orden de preferencia (español › VEVO › otros)
+const YT_IDS = [
+  'cPWcImHm554',   // versión oficial en español – 19 M vistas
+  'jOdhtimtnvo',   // Roberto Carlos Topic – 32 M
+  '5fFjjiD1IoM',   // VEVO oficial – 3.1 M
+  'wjkZtSaw5WY'    // versión extra
+];
+
+let isPlaying    = false;
 let ytPlayer     = null;
 let ytReady      = false;
+let ytIdIndex    = 0;
 let progressTimer;
 
-// 1. Cargar la YouTube IFrame API
-(function loadYTAPI() {
+// 1. Crear el contenedor del iframe fuera de pantalla
+function buildYTContainer() {
+  const wrap = document.createElement('div');
+  wrap.id = 'yt-wrap';
+  wrap.style.cssText = [
+    'position:fixed',
+    'top:-500px',
+    'left:-500px',
+    'width:320px',      // tamaño real → YouTube no lo bloquea
+    'height:180px',
+    'pointer-events:none',
+    'opacity:0',
+    'z-index:-1'
+  ].join(';');
+  document.body.appendChild(wrap);
+
+  const div = document.createElement('div');
+  div.id = 'yt-player-div';
+  wrap.appendChild(div);
+}
+
+// 2. Cargar la YouTube IFrame API
+function loadYTAPI() {
   if (document.getElementById('yt-api-script')) return;
+  buildYTContainer();
   const s  = document.createElement('script');
   s.id     = 'yt-api-script';
   s.src    = 'https://www.youtube.com/iframe_api';
   document.head.appendChild(s);
-})();
+}
 
-// 2. Callback global requerido por YouTube
+// 3. Callback global requerido por YouTube
 window.onYouTubeIframeAPIReady = function () {
+  tryLoadVideo(ytIdIndex);
+};
+
+function tryLoadVideo(idx) {
+  if (idx >= YT_IDS.length) return; // todos fallaron
+
+  if (ytPlayer) {
+    ytPlayer.destroy();
+    ytPlayer = null;
+  }
+
   ytPlayer = new YT.Player('yt-player-div', {
-    height: '1',
-    width:  '1',
-    videoId: RC_VIDEO_ID,
+    height: '180',
+    width:  '320',
+    videoId: YT_IDS[idx],
     playerVars: {
-      autoplay: 0, controls: 0, disablekb: 1,
-      fs: 0, modestbranding: 1, rel: 0, playsinline: 1
+      autoplay:       0,
+      controls:       0,
+      disablekb:      1,
+      fs:             0,
+      modestbranding: 1,
+      rel:            0,
+      playsinline:    1,
+      origin:         location.origin || '*'
     },
     events: {
-      onReady:       () => { ytReady = true; },
-      onStateChange: (e) => {
-        if (e.data === YT.PlayerState.ENDED) { _resetPlayer(); }
+      onReady: function () {
+        ytReady = true;
+      },
+      onError: function () {
+        // Este ID falló → probar el siguiente
+        ytIdIndex++;
+        ytReady = false;
+        // Recrear el div (destroy lo elimina)
+        const wrap = document.getElementById('yt-wrap');
+        if (wrap) {
+          const newDiv = document.createElement('div');
+          newDiv.id = 'yt-player-div';
+          wrap.appendChild(newDiv);
+        }
+        tryLoadVideo(ytIdIndex);
+      },
+      onStateChange: function (e) {
+        if (e.data === YT.PlayerState.ENDED) { _resetUI(); }
       }
     }
   });
-};
+}
 
-// 3. Helpers internos
+// 4. Barra de progreso
 function _startBar() {
   clearInterval(progressTimer);
   progressTimer = setInterval(() => {
     if (!ytPlayer || !ytPlayer.getDuration) return;
     const dur  = ytPlayer.getDuration() || 1;
     const curr = ytPlayer.getCurrentTime() || 0;
-    const el   = document.getElementById('progress');
-    if (el) el.style.width = ((curr / dur) * 100) + '%';
+    const bar  = document.getElementById('progress');
+    if (bar) bar.style.width = ((curr / dur) * 100) + '%';
   }, 400);
 }
 
-function _resetPlayer() {
+// 5. Resetear UI
+function _resetUI() {
   isPlaying = false;
   clearInterval(progressTimer);
   const btn  = document.getElementById('playBtn');
   const disc = document.getElementById('disc');
-  if (btn)  btn.textContent = '▶';
+  if (btn)  btn.innerHTML = '<i class="bi bi-play-fill"></i>';
   if (disc) disc.classList.remove('spinning');
 }
 
-// 4. Funciones públicas llamadas por los botones del HTML
+// 6. Controles públicos (llamados por los botones del HTML)
 function togglePlay() {
-  if (!ytReady) return;          // API todavía no lista — esperar
+  if (!ytReady) return;
+
   if (isPlaying) {
     ytPlayer.pauseVideo();
-    _resetPlayer();
+    _resetUI();
   } else {
     ytPlayer.playVideo();
     isPlaying = true;
     const btn  = document.getElementById('playBtn');
     const disc = document.getElementById('disc');
-    if (btn)  btn.textContent = '⏸';
+    if (btn)  btn.innerHTML = '<i class="bi bi-pause-fill"></i>';
     if (disc) disc.classList.add('spinning');
     _startBar();
   }
@@ -163,14 +230,22 @@ function togglePlay() {
 function prevSong() {
   if (!ytReady) return;
   ytPlayer.seekTo(0, true);
-  const el = document.getElementById('progress');
-  if (el) el.style.width = '0%';
+  const bar = document.getElementById('progress');
+  if (bar) bar.style.width = '0%';
 }
 
 function nextSong() { prevSong(); }
+
+// ── RSVP Form ──────────────────────────
+function submitRSVP(e) {
+  e.preventDefault();
+  document.querySelector('.rsvp-form').classList.add('hidden');
+  document.getElementById('rsvp-thanks').classList.remove('hidden');
+}
 
 // ── Init ───────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   createPetals();
   document.body.style.overflow = 'hidden';
+  loadYTAPI();   // cargar la API de YouTube desde el inicio
 });
